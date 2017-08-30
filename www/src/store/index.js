@@ -1,7 +1,7 @@
 import axios from 'axios'
 import vue from 'vue'
 import vuex from 'vuex'
-import $ from 'jquery'
+// import $ from 'jquery'
 import router from '../router'
 
 let api = axios.create({
@@ -20,13 +20,13 @@ vue.use(vuex)
 var store = new vuex.Store({
   state: {
     user: {},
-    boards: [{ name: 'This is total rubbish' }],
+    boards: [{ name: '' }],
     activeBoard: {},
-    error: {}
+    error: {},
+    lists: []
   },
   mutations: {
     setBoards(state, data) {
-      console.log(data)
       state.boards = data
     },
     handleError(state, err) {
@@ -42,14 +42,23 @@ var store = new vuex.Store({
       state.user = {}
     },
     setActiveBoard(state, data) {
-      state.board = data
+      //console.log(data)
+      state.activeBoard = data
+    },
+
+    //list mutations
+
+    setLists(state, data) {
+      state.lists = data
     }
   },
   actions: {
     //when writing your auth routes (login, logout, register) be sure to use auth instead of api for the posts
 
+    //Board Actions
+
     getBoards({ commit, dispatch }) {
-      api('boards')
+      api('userboards')
         .then(res => {
           commit('setBoards', res.data.data)
         })
@@ -88,6 +97,50 @@ var store = new vuex.Store({
       commit('handleError', err)
     },
 
+    //List Actions
+
+    getListsByBoard({ commit, dispatch }, boardId) {
+      api('boards/' + boardId + '/lists')
+        .then(res => {
+          commit('setLists', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    // getBoard({ commit, dispatch }, id) {
+    //   api('boards/' + id)
+    //     .then(res => {
+    //       commit('setActiveBoard', res.data.data)
+    //     })
+    //     .catch(err => {
+    //       commit('handleError', err)
+    //     })
+    // },
+    createList({ commit, dispatch }, list) {
+      api.post('lists', list)
+        .then(res => {
+          dispatch('getListsByBoard', list.boardId)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    removeList({ commit, dispatch }, list) {
+      api.delete('/lists/' + list._id)
+        .then(res => {
+          console.log(res)
+          dispatch('getListsByBoard', list.boardId)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    // handleError({ commit, dispatch }, err) {
+    //   commit('handleError', err)
+    // },
+
+    //User Actions
 
     createUser({ commit, dispatch }, user) {
       auth.post("register", user).then(res => {
@@ -102,7 +155,10 @@ var store = new vuex.Store({
         console.log(res)
         if (res.data.data) {
           return router.push('/boards')
+        } else if (res.data.error) {
+          alert('Invalid Username or Password')
         }
+
         commit('setUser', res)
       })
         .catch(err => {

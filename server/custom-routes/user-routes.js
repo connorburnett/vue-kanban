@@ -2,39 +2,7 @@ var express = require('express')
 var router = express.Router()
 var user = require('../models/user')
 let Boards = require('../models/board')
-
-router
-
-  .get('/', (req, res, next) => {
-    user.find({})
-      .then(user => {
-        res.send(user)
-      })
-      .catch(next)
-  })
-
-
-  .post('/', (req, res, next) => {
-    user.create(req.body)
-      .then(user => {
-        res.send("Success")
-      }).catch(next)
-  })
-
-// ERROR HANDLER
-router.use('/', (err, req, res, next) => {
-  if (err) {
-    res.send(418, {
-      success: false,
-      error: err.message
-    })
-  } else {
-    res.send(400, {
-      success: false,
-      error: 'Something failed please try again later'
-    })
-  }
-})
+let Lists = require('../models/list')
 
 module.exports = router
 
@@ -63,7 +31,20 @@ module.exports = {
           return next(handleResponse(action, null, error))
         })
     }
-  }
+  },
+  boardLists: {
+    path: '/boards/:boardId/lists',
+      reqType: 'get',
+        method(req, res, next) {
+      let action = 'Find Board Lists'
+      Lists.find({ boardId: req.params.boardId })
+        .then(lists => {
+          res.send(handleResponse(action, lists))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
 }
 
 

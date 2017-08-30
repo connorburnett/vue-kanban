@@ -6,9 +6,12 @@
         <div class="list panel panel-primary">
 
             <div class="panel-heading">
+
+                <button @click="">X</button>
+                <div v-for="list in board">
+                    <h2>{{ list.name }}</h2>
+                </div>
                 <button @click="">Add Task</button>
-                <h2>LIST 1</h2>
-                <button @click="">Remove List</button>
             </div>
             <div class="panel-body">
                 <task></task>
@@ -20,9 +23,32 @@
 <script>
     import Task from './Task'
     export default {
-        name: 'List',
+        name: 'list',
+        data() {
+            return {
+                user: {
+                    name: '',
+                    password: '',
+                    email: ''
+                },
+                boardId: this.$route.params.boardId,
+                name: '',
+                description: '',
+                see: true,
+                seen: false,
+                unameSeen: false,
+            }
+        },
         components: {
             Task
+        },
+        computed: {
+            board() {
+                return this.$store.state.activeBoard
+            },
+            list() {
+                return this.$store.state.activeList
+            }
         }
     }
 
@@ -40,10 +66,14 @@
     }
 
     h2 {
-        color: white;
+        color: black;
     }
 
     button {
+        color: black;
+    }
+
+    input {
         color: black;
     }
 </style>

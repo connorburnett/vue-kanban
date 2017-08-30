@@ -1,54 +1,29 @@
 <template>
   <div class="container">
-    <boards></boards>
 
     <div class="row">
 
 
       <div class="board panel panel-primary">
         <div class="panel-heading">
-          <button @click="">Back to Home</button>
-          <h2>Board Name</h2>
-          <button @click="">Create List</button>
+          <button type="btn btn-primary">
+            <router-link to="/boards/">Home</router-link>
+          </button>
+          <span>
+              <h2>{{board.name}}</h2> 
+              <h5>{{board.description}}</h5>
+            </span>
+          <form @submit.prevent="createList()">
+            <input type="text" v-model="list.name" placeholder="List Name">
+            <button>Create List</button>
+          </form>
         </div>
         <div class="panel-body">
-          <div class="col-xs-4">
-            <list></list>
-          </div>
-
-          <div class="col-xs-4">
-            <div class="default panel-heading">
-              <h5>In Progress</h5>
-            </div>
-            <div class="list panel panel-primary">
-              <div class="panel-heading">
-                <button @click="">Add Task</button>
-                <h2>LIST 1</h2>
-                <button @click="">Remove List</button>
-              </div>
-              <div class="panel-body">
-
-              </div>
+          <div class="col-xs-12">
+            <div v-for="list in lists">
+              <lists :listprop="list"></lists>
             </div>
           </div>
-
-          <div class="col-xs-4">
-            <div class="default panel-heading">
-              <h5>Done</h5>
-            </div>
-            <div class="list panel panel-primary">
-              <div class="panel-heading">
-                <button @click="">Add Task</button>
-                <h2>LIST 1</h2>
-                <button @click="">Remove List</button>
-              </div>
-              <div class="panel-body">
-
-
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
@@ -57,20 +32,48 @@
 
 <script>
   import Boards from './Boards'
-  import List from './List'
+  import Lists from './Lists'
   export default {
     name: 'board',
+    data() {
+      return {
+        user: {
+          name: '',
+          password: '',
+          email: ''
+        },
+        list: {
+          name: '',
+          description: '',
+          boardId: this.$route.params.boardId
+        },
+        see: true,
+        seen: false,
+        unameSeen: false
+      }
+    },
     mounted() {
-      this.$root.$store.dispatch('getBoard', this.$route.params.id)
+      this.$root.$store.dispatch('getListsByBoard', this.$route.params.boardId)
     },
     components: {
       Boards,
-      List
+      Lists
     },
     computed: {
       board() {
         return this.$store.state.activeBoard
+      },
+      boards() {
+        return this.$store.state.boards
+      },
+      lists() {
+        return this.$store.state.lists
       }
+    },
+    methods: {
+      createList() {
+        this.$store.dispatch('createList', this.list)
+      },
     }
   }
 

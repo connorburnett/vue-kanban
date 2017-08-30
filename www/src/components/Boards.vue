@@ -1,24 +1,9 @@
 <template>
   <div>
     <div class="heading">
-      <button @click="showLogin">Login</button>
-      <button @click="showSignup">Signup</button>
       <button @click="logoutUser">Logout</button>
 
 
-      <div id="stuff">
-        <form v-show="seen" @submit.prevent="createUser()">
-          <input type="text" v-model="user.name" placeholder="username">
-          <input type="password" v-model="user.password" placeholder="password">
-          <input type="text" v-model="user.email" placeholder="email">
-          <button type="submit">CREATE</button>
-        </form>
-        <form v-show="unameSeen" @submit.prevent="loginUser()">
-          <input type="text" v-model="user.email" placeholder="email">
-          <input type="password" v-model="user.password" placeholder="password">
-          <button type="submit">LOGIN</button>
-        </form>
-      </div>
     </div>
     <form @submit.prevent="createBoard()">
       <input type="text" v-model="name" placeholder="Board Name">
@@ -27,7 +12,10 @@
     </form>
     <ul v-if="see">
       <li v-for="board in boards">
-        <router-link :to="'/boards/'+board._id">{{board.name}} {{board.description}}</router-link> <span @click="removeBoard(board)"><button class="red">x</button></span>
+        <span @click="getBoard(board._id)">
+        <router-link :to="'/boards/'+board._id">{{board.name}} {{board.description}}</router-link> 
+        </span>
+        <span @click="removeBoard(board)"><button class="red">x</button></span>
       </li>
     </ul>
     <!--<board></board>-->
@@ -75,6 +63,10 @@
 
         }
       },
+
+      getBoard(id) {
+        this.$store.dispatch('getBoard', id)
+      },
       showSignup() {
         if (this.unameSeen) {
           this.showLogin()
@@ -107,11 +99,11 @@
 </script>
 
 <style scoped>
-.red {
-  color: red;
-}
+  .red {
+    color: red;
+  }
 
-div {
-  font-size: 1.8rem;
-}
+  div {
+    font-size: 1.8rem;
+  }
 </style>
