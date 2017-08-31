@@ -2,17 +2,17 @@
     <div>
         <div class="panel panel-default">
             <div class="task panel-heading panel-primary">
-                <button @click="">Remove Task</button>
-                <h3>This is what we need to do</h3>
+                <button @click="removeTask(taskprop)">Remove Task</button>
+                <h3>{{taskprop.name}}</h3>
             </div>
             <div class="panel-body">
-                <ul>
-                    <li>Comment</li>
-                    <li>Comment</li>
-                    <li>Comment</li>
-                </ul>
-
-                <comment></comment>
+                <div v-for="comment in comments">
+                    <comment :commentprop="comment"></comment>
+                </div>
+                <form @submit.prevent="addComment()">
+                    <input type="text" v-model="comment.name" placeholder="Write comment...">
+                    <button type="submit">Submit</button>
+                </form>
             </div>
         </div>
     </div>
@@ -22,9 +22,42 @@
     import Comment from './Comment'
     export default {
         name: 'task',
+        data() {
+            return {
+                user: {
+                    name: '',
+                    password: '',
+                    email: ''
+                },
+                comment: {
+                    name: '',
+                    description: '',
+                    boardId: this.$route.params.boardId,
+                    listId: this.taskprop.listId,
+                    taskId: this.taskprop._id
+                },
+            }
+        },
         components: {
             Comment
-        }
+        },
+        computed: {
+            comments() {
+                return this.$store.state.comments[this.taskprop._id]
+            }
+        },
+        props: ['taskprop'],
+        methods: {
+            removeTask(taskprop) {
+                this.$store.dispatch('removeTask', taskprop)
+            },
+            addComment() {
+                this.$store.dispatch('createComment', this.comment)
+            }
+        },
+        created() {
+            this.$root.$store.dispatch('getCommentsByTask', this.comment)
+        },
     }
 
 </script>

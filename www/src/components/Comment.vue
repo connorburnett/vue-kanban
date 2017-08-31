@@ -2,17 +2,42 @@
     <div>
 
         <!--Goes in the comment template-->
-        <form @submit.prevent="">
-            <input type="text" placeholder="Write comment...">
-            <button type="submit">Submit</button>
-        </form>
+        <span>
+            {{commentprop.name}}
+            <button @click="removeComment(commentprop)">X</button>
+        </span>
         <!---->
     </div>
 </template>
 
 <script>
     export default {
-        name: 'comment'
+        name: 'comment',
+        data() {
+            return {
+                comment: {
+                    name: '',
+                    description: '',
+                    boardId: this.$route.params.boardId,
+                    listId: this.commentprop.listId,
+                    taskId: this.commentprop.taskId,
+                    commentId: this.commentprop._id,
+                },
+            }
+        },
+        components: {
+        },
+        computed: {
+            comments() {
+                return this.$store.state.comments
+            }
+        },
+        props: ['commentprop'],
+        methods: {
+            removeComment(commentprop) {
+                this.$store.dispatch('removeComment', commentprop)
+            }
+        }
     }
 
 </script>

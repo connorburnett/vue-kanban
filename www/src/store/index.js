@@ -23,7 +23,9 @@ var store = new vuex.Store({
     boards: [{ name: '' }],
     activeBoard: {},
     error: {},
-    lists: []
+    lists: [],
+    tasks: {},
+    comments: {}
   },
   mutations: {
     setBoards(state, data) {
@@ -50,7 +52,27 @@ var store = new vuex.Store({
 
     setLists(state, data) {
       state.lists = data
+    },
+
+    //task mutations
+
+    setTasks(state, list) {
+      vue.set(state.tasks, list._id, list.tasks)
+
+      // for (var i = 0; i < data.length; i++) {
+      //   var task = data[i]
+      //   console.log(data)
+      //   state.tasks[task.listId].push(task)
+      // }
+      // console.log(state.tasks)
+    },
+
+    //comment mutations
+
+    setComments(state, task) {
+      vue.set(state.comments, task._id, task.comments)
     }
+
   },
   actions: {
     //when writing your auth routes (login, logout, register) be sure to use auth instead of api for the posts
@@ -108,15 +130,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    // getBoard({ commit, dispatch }, id) {
-    //   api('boards/' + id)
-    //     .then(res => {
-    //       commit('setActiveBoard', res.data.data)
-    //     })
-    //     .catch(err => {
-    //       commit('handleError', err)
-    //     })
-    // },
+
     createList({ commit, dispatch }, list) {
       api.post('lists', list)
         .then(res => {
@@ -126,6 +140,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+
     removeList({ commit, dispatch }, list) {
       api.delete('/lists/' + list._id)
         .then(res => {
@@ -136,9 +151,73 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    // handleError({ commit, dispatch }, err) {
-    //   commit('handleError', err)
-    // },
+
+    // Task Actions
+
+    getTasksByList({ commit, dispatch }, task) {
+      api('boards/' + task.boardId + '/lists/' + task.listId + '/tasks')
+        .then(res => {
+          commit('setTasks', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+    createTask({ commit, dispatch }, task) {
+      api.post('tasks', task)
+        .then(res => {
+          dispatch('getTasksByList', task)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    removeTask({ commit, dispatch }, task) {
+      api.delete('/tasks/' + task._id)
+        .then(res => {
+          console.log(res)
+          dispatch('getTasksByList', task)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    handleError({ commit, dispatch }, err) {
+      commit('handleError', err)
+    },
+
+    // Comment Actions
+
+    getCommentsByTask({ commit, dispatch }, comment) {
+      api('boards/' + comment.boardId + '/lists/' + comment.listId + '/tasks/' + comment.taskId + '/comments')
+        .then(res => {
+          commit('setComments', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    
+    createComment({ commit, dispatch }, comment) {
+      api.post('comments', comment)
+        .then(res => {
+          dispatch('getCommentsByTask', comment)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    removeComment({ commit, dispatch }, comment) {
+      api.delete('/comments/' + comment._id)
+        .then(res => {
+          console.log(res)
+          dispatch('getCommentsByTask', comment)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
 
     //User Actions
 

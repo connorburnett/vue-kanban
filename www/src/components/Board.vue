@@ -21,7 +21,7 @@
         <div class="panel-body">
           <div class="col-xs-12">
             <div v-for="list in lists">
-              <lists :listprop="list"></lists>
+              <list :listprop="list"></list>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
 
 <script>
   import Boards from './Boards'
-  import Lists from './Lists'
+  import List from './List'
   export default {
     name: 'board',
     data() {
@@ -57,7 +57,7 @@
     },
     components: {
       Boards,
-      Lists
+      List
     },
     computed: {
       board() {

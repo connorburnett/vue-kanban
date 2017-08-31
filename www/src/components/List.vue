@@ -1,29 +1,35 @@
 <template>
+
     <div>
-        <div class="default panel-heading">
-            <h5>Requested</h5>
-        </div>
-        <div class="list panel panel-primary">
 
-            <div class="panel-heading">
+        <div class="col-xs-4">
+            <div class="list panel panel-primary">
 
-                <button @click="">X</button>
-                <div v-for="list in board">
-                    <h2>{{ list.name }}</h2>
+                <div class="panel-heading">
+                    <button @click="removeList(listprop)">X</button>
+                    <h5>{{listprop.name}}<br></h5>
+                    <form @submit.prevent="createTask()">
+                        <input type="text" v-model="task.name" placeholder="What are you doing today?">
+                        <button>Add Task</button>
+                    </form>
                 </div>
-                <button @click="">Add Task</button>
-            </div>
-            <div class="panel-body">
-                <task></task>
+                <div class="panel-body">
+                    <div v-for="task in tasks">
+                        <task :taskprop="task"></task>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- <list></list> -->
+
     </div>
+
 </template>
 
 <script>
     import Task from './Task'
     export default {
-        name: 'list',
+        props: ['listprop'],
         data() {
             return {
                 user: {
@@ -31,28 +37,39 @@
                     password: '',
                     email: ''
                 },
-                boardId: this.$route.params.boardId,
-                name: '',
-                description: '',
-                see: true,
-                seen: false,
-                unameSeen: false,
+                task: {
+                    name: '',
+                    description: '',
+                    boardId: this.$route.params.boardId,
+                    listId: this.listprop._id
+                },
+            }
+        },
+        computed: {
+            tasks() {
+                return this.$store.state.tasks[this.listprop._id]
             }
         },
         components: {
             Task
         },
-        computed: {
-            board() {
-                return this.$store.state.activeBoard
+        name: 'list',
+        mounted() {
+            this.$root.$store.dispatch('getTasksByList', this.task)
+        },
+        methods: {
+            removeList(listprop) {
+                console.log(listprop)
+                this.$store.dispatch('removeList', listprop)
             },
-            list() {
-                return this.$store.state.activeList
+            createTask() {
+                this.$store.dispatch('createTask', this.task)
             }
         }
     }
 
 </script>
+
 
 <style>
     .default {
