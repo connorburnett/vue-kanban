@@ -2,6 +2,15 @@
     <div>
         <div class="panel panel-default">
             <div class="task panel-heading panel-primary">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Select List Location...
+                            <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <div v-for="list in lists">
+                            <button @click="setTaskLocation(list._id)">{{ list.name }}</button>
+                        </div>
+                    </ul>
+                </div>
                 <h3>
                     <span>
                         <button class="btn btn-default red" @click="removeTask(taskprop)">x</button>
@@ -11,7 +20,7 @@
             </div>
             <div>
                 <div v-for="comment in comments">
-                    <comment :commentprop="comment"></comment>
+                    <comment :userprop="user" :commentprop="comment"></comment>
                 </div>
                 <form @submit.prevent="addComment()">
                     <input class="form-control" type="text" v-model="comment.name" placeholder="Write comment...">
@@ -48,7 +57,15 @@
         computed: {
             comments() {
                 return this.$store.state.comments[this.taskprop._id]
+            },
+            lists() {
+                return this.$store.state.lists
+            },
+            //
+            tasks() {
+                return this.$store.state.tasks
             }
+            //
         },
         props: ['taskprop'],
         methods: {
@@ -57,10 +74,19 @@
             },
             addComment() {
                 this.$store.dispatch('createComment', this.comment)
+            },
+            setTaskLocation(newListId) {
+                var updatedData = {
+                    oldId: this.taskprop.listId,
+                    updatedId: newListId,
+                    task: this.taskprop
+                }
+                this.$store.dispatch('setTaskLocation', updatedData)
             }
         },
         created() {
             this.$root.$store.dispatch('getCommentsByTask', this.comment)
+            //this.$root.$store.dispatch('getTasksByList', this.task)
         },
     }
 

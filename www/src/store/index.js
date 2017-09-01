@@ -5,13 +5,13 @@ import vuex from 'vuex'
 import router from '../router'
 
 let api = axios.create({
-  baseURL: 'http://localhost:3000/api/',
+  baseURL: '//kanbanvue.herokuapp.com/api/',
   timeout: 2000,
   withCredentials: true
 })
 
 let auth = axios.create({
-  baseURL: 'http://localhost:3000/',
+  baseURL: '//kanbanvue.herokuapp.com/',
   timeout: 2000,
   withCredentials: true
 })
@@ -26,6 +26,11 @@ var store = new vuex.Store({
     lists: [],
     tasks: {},
     comments: {}
+  },
+  getters: {
+    tasks : state => {
+      return state.tasks
+    }
   },
   mutations: {
     setBoards(state, data) {
@@ -58,13 +63,21 @@ var store = new vuex.Store({
 
     setTasks(state, list) {
       vue.set(state.tasks, list._id, list.tasks)
-
-      // for (var i = 0; i < data.length; i++) {
-      //   var task = data[i]
-      //   console.log(data)
-      //   state.tasks[task.listId].push(task)
-      // }
-      // console.log(state.tasks)
+    },
+    removeTask(state, task) {
+      var arr = state.tasks[task.listId]
+      // var index = -1
+      for ( var i = 0; i < arr.length; i++){
+        var currentTask = arr[i]
+        if (currentTask._id == task._id){
+          console.log(currentTask)
+          arr.splice(i, 1)
+          break
+        }
+      }
+      // var index = arr.indexOf(task)
+      // console.log(index)
+      // arr.splice(index, 1)
     },
 
     //comment mutations
@@ -185,6 +198,19 @@ var store = new vuex.Store({
     },
     handleError({ commit, dispatch }, err) {
       commit('handleError', err)
+    },
+    setTaskLocation({ commit, dispatch }, updater) {
+      let updatedTask = updater.task
+      updatedTask.listId = updater.updatedId
+      api.put('/tasks/' + updatedTask._id, updatedTask)
+      .then(res => {
+        dispatch('getTasksByList', updatedTask)
+        updater.task.listId = updater.oldId
+        dispatch('getTasksByList', updater.task)
+      })
+      .catch(err => {
+        commit('handleError', err)
+      })
     },
 
     // Comment Actions

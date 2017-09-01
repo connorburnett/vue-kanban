@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <div class="title">
-      <router-link class="btncolor" to="/boards/">
-        <h1>The KANBAN</h1>
-      </router-link>
+  <div class="all">
+    <div class="stuff">
+      <div class="title">
+        <router-link class="btncolor" to="/boards/">
+          <h1>The KANBAN</h1>
+        </router-link>
+      </div>
     </div>
     <div class="container">
       <div class="row">
@@ -91,7 +93,7 @@
   }
 
   h1 {
-    color: crimson;
+    color: white;
     font-size: 60px;
     font-family: 'Abril Fatface', cursive;
     text-shadow: 0 0 3px gray;
@@ -123,5 +125,30 @@
   h4 {
     font-family: 'Catamaran', sans-serif;
     font-size: 20px;
+  }
+
+  .all {
+    background: url('https://wallpapercave.com/wp/j8eMFrM.jpg') no-repeat center center fixed;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    /* <------ */
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    margin-top: -5vh;
+    padding-top: 5vh;
+  }
+
+  .stuff {
+    width: 60rem;
+    -moz-border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    border-radius: 2rem;
+    background: black;
+    opacity: 0.8;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 </style>

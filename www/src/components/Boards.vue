@@ -1,34 +1,32 @@
 <template>
 
-  <div>
-    <div class="title">
-      <h1>The KANBAN</h1>
-    </div>
-    <div class="heading">
-      <button class="btn btn-default b" @click="logoutUser">Logout</button>
-
-
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-4"></div>
-        <div class="col-xs-4">
-          <form @submit.prevent="createBoard()">
-            <input class="form-control formcss" type="text" v-model="name" placeholder="Board Name">
-            <input class="form-control formcss" type="text" v-model="description" placeholder="Board Description">
-            <button class="btn btn-default c">Add Board</button>
-          </form>
-        </div>
-        <div class="col-xs-4"></div>
+  <div class="all">
+    <div class="stuff">
+      <div class="title">
+        <h1>The KANBAN</h1>
       </div>
-    </div>
+      <div class="heading">
+        <button class="btn btn-default b" @click="logoutUser">Logout</button>
 
-    <div v-if="see">
-      <div class="boards" v-for="board in boards">
-        <span @click="getBoard(board._id)">
+
+      </div>
+
+      <form @submit.prevent="createBoard()">
+        <input class="formcss" type="text" v-model="name" placeholder="Board Name">
+        <p>
+          <input class="formcss" type="text" v-model="description" placeholder="Board Description">
+        </p>
+        <button class="btn btn-default c">Add Board</button>
+      </form>
+
+
+      <div v-if="see">
+        <div class="boards" v-for="board in boards">
+          <span @click="getBoard(board._id)">
         <router-link class="boardcolor" :to="'/boards/'+board._id">{{board.name}}</router-link> <!--{{board.description}}-->
         </span>
-        <span @click="removeBoard(board)"><button class="red btn btn-default">x</button></span>
+          <span @click="removeBoard(board)"><button class="red btn btn-default">x</button></span>
+        </div>
       </div>
     </div>
   </div>
@@ -112,7 +110,7 @@
 
 <style scoped>
   h1 {
-    color: crimson;
+    color: white;
     font-size: 60px;
     font-family: 'Abril Fatface', cursive;
     text-shadow: 0 0 3px gray;
@@ -139,7 +137,7 @@
   }
 
   .boardcolor {
-    color: crimson;
+    color: white;
   }
 
   .red {
@@ -152,5 +150,32 @@
 
   .formcss {
     margin-bottom: 20px;
+  }
+
+  .all {
+    background: url('https://wallpapercave.com/wp/j8eMFrM.jpg') no-repeat center center fixed;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    /* <------ */
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    margin-top: -5vh;
+    padding-top: 5vh;
+  }
+
+  .stuff {
+    width: 60rem;
+    -moz-border-radius: 5rem;
+    -webkit-border-radius: 5rem;
+    border-radius: 5rem;
+    background: black;
+    opacity: 0.8;
+    margin: auto;
+    margin-top: 15rem;
+    margin-bottom: 10rem;
+    padding-top: 12rem;
+    padding-bottom: 10vh;
   }
 </style>

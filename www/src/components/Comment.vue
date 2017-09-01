@@ -1,13 +1,11 @@
 <template>
 
     <div>
-
-        <!--Goes in the comment template-->
         <span>
+           
             {{commentprop.name}}
             <button class="btn btn-default" @click="removeComment(commentprop)">x</button>
         </span>
-        <!---->
     </div>
 </template>
 
@@ -33,7 +31,7 @@
                 return this.$store.state.comments
             }
         },
-        props: ['commentprop'],
+        props: ['commentprop', 'userprop'],
         methods: {
             removeComment(commentprop) {
                 this.$store.dispatch('removeComment', commentprop)

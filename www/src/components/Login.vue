@@ -1,35 +1,33 @@
 <template>
-    <div>
-        <div class="title">
-            <h1>The KANBAN</h1>
-        </div>
-        <div class="heading">
-            <button class="btn btn-default b" @click="showLogin">LOGIN</button>
-            <button class="btn btn-default b" @click="showSignup">SIGN UP</button>
+    <div class="all">
+        <div class="stuff">
+            <div class="title">
+                <h1>The KANBAN</h1>
+            </div>
+            <div class="heading">
+                <button class="btn btn-default b" @click="showLogin">LOGIN</button>
+                <button class="btn btn-default b" @click="showSignup">SIGN UP</button>
 
 
-            <div id="stuff">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-4"></div>
-                        <div class="col-xs-4">
-                            <form v-show="seen" @submit.prevent="createUser()">
-                                <input class="form-control formcss" type="text" v-model="user.name" placeholder="username">
-                                <input class="form-control formcss" type="password" v-model="user.password" placeholder="password">
-                                <input class="form-control formcss" type="text" v-model="user.email" placeholder="email">
-                                <button class="btn btn-default c" type="submit">CREATE</button>
-                            </form>
-                            <form v-show="unameSeen" @submit.prevent="loginUser()">
-                                <input class="form-control formcss" type="text" v-model="user.email" placeholder="email">
-                                <input class="form-control formcss" type="password" v-model="user.password" placeholder="password">
-                                <button class="btn btn-default c" type="submit">LOGIN</button>
-                            </form>
-                        </div>
-                        <div class="col-xs-4"></div>
-                    </div>
+                <div id="stuff">
+
+                    <form v-show="seen" @submit.prevent="createUser()">
+                        <input class="formcss" type="text" v-model="user.name" placeholder="username">
+                        <input class="formcss" type="password" v-model="user.password" placeholder="password">
+                        <input class="formcss" type="text" v-model="user.email" placeholder="email">
+                        <button class="btn btn-default c" type="submit">CREATE</button>
+                    </form>
+                    <form v-show="unameSeen" @submit.prevent="loginUser()">
+                        <input class="formcss" type="text" v-model="user.email" placeholder="email">
+                        <input class="formcss" type="password" v-model="user.password" placeholder="password">
+                        <button class="btn btn-default c" type="submit">LOGIN</button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
+    </div>
     </div>
 </template>
 
@@ -86,7 +84,7 @@
 
 <style scoped>
     h1 {
-        color: crimson;
+        color: white;
         font-size: 60px;
         font-family: 'Abril Fatface', cursive;
         text-shadow: 0 0 3px gray;
@@ -112,5 +110,32 @@
 
     .formcss {
         margin-bottom: 20px;
+    }
+
+    .all {
+        background: url('https://wallpapercave.com/wp/j8eMFrM.jpg') no-repeat center center fixed;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        /* <------ */
+        background-repeat: no-repeat;
+        background-position: center center;
+        height: 100vh;
+        margin-top: -5vh;
+        padding-top: 5vh;
+    }
+
+    .stuff {
+        width: 60rem;
+        -moz-border-radius: 5rem;
+        -webkit-border-radius: 5rem;
+        border-radius: 5rem;
+        background: black;
+        opacity: 0.8;
+        margin: auto;
+        margin-top: 15rem;
+        margin-bottom: 10rem;
+        padding-top: 12rem;
+        padding-bottom: 10vh;
     }
 </style>

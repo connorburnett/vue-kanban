@@ -1,0 +1,250 @@
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+h1[data-v-0c6e3af6] {
+  color: white;
+  font-size: 60px;
+  font-family: 'Abril Fatface', cursive;
+  text-shadow: 0 0 3px gray;
+}
+.b[data-v-0c6e3af6] {
+  color: black;
+  font-size: 20px;
+  font-family: 'Catamaran', sans-serif;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.c[data-v-0c6e3af6] {
+  color: black;
+  font-size: 20px;
+  font-family: 'Catamaran', sans-serif;
+}
+.boards[data-v-0c6e3af6] {
+  padding-top: 20px;
+  font-size: 25px;
+  font-family: 'Catamaran', sans-serif;
+}
+.boardcolor[data-v-0c6e3af6] {
+  color: white;
+}
+.red[data-v-0c6e3af6] {
+  color: red;
+}
+div[data-v-0c6e3af6] {
+  font-size: 1.8rem;
+}
+.formcss[data-v-0c6e3af6] {
+  margin-bottom: 20px;
+}
+.all[data-v-0c6e3af6] {
+  background: url('https://wallpapercave.com/wp/j8eMFrM.jpg') no-repeat center center fixed;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  /* <------ */
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh;
+  margin-top: -5vh;
+  padding-top: 5vh;
+}
+.stuff[data-v-0c6e3af6] {
+  width: 60rem;
+  border-radius: 5rem;
+  background: black;
+  opacity: 0.8;
+  margin: auto;
+  margin-top: 15rem;
+  margin-bottom: 10rem;
+  padding-top: 12rem;
+  padding-bottom: 10vh;
+}
+
+.panel-heading[data-v-5337eb44] {
+  padding-bottom: 40px;
+}
+h1[data-v-5337eb44] {
+  color: white;
+  font-size: 60px;
+  font-family: 'Abril Fatface', cursive;
+  text-shadow: 0 0 3px gray;
+  margin-bottom: 30px;
+}
+.default[data-v-5337eb44] {
+  margin-bottom: 20px;
+}
+h2[data-v-5337eb44] {
+  color: black;
+  font-family: 'Catamaran', sans-serif;
+  font-size: 40px;
+  text-shadow: 0 0 3px gray;
+}
+button[data-v-5337eb44] {
+  color: black;
+  font-family: 'Catamaran', sans-serif;
+  font-size: 20px;
+}
+.btncolor[data-v-5337eb44] {
+  color: black;
+}
+h4[data-v-5337eb44] {
+  font-family: 'Catamaran', sans-serif;
+  font-size: 20px;
+}
+.all[data-v-5337eb44] {
+  background: url('https://wallpapercave.com/wp/j8eMFrM.jpg') no-repeat center center fixed;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  /* <------ */
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh;
+  margin-top: -5vh;
+  padding-top: 5vh;
+}
+.stuff[data-v-5337eb44] {
+  width: 60rem;
+  border-radius: 2rem;
+  background: black;
+  opacity: 0.8;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.default {
+    margin-bottom: 20px;
+}
+h2 {
+    color: black;
+}
+h5 {
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+button {
+    color: black;
+    font-family: 'Catamaran', sans-serif;
+    font-size: 15px;
+}
+.btn {
+    font-size: 15px;
+}
+input {
+    color: black;
+}
+.red {
+    color: red;
+}
+.fillout {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.default {
+    margin-bottom: 20px;
+}
+h2 {
+    color: white;
+}
+button {
+    color: black;
+}
+.red {
+    color: red;
+}
+h3 {
+    font-size: 15px;
+    color: black;
+}
+
+.default {
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+h2 {
+    color: white;
+}
+button {
+    color: black;
+}
+
+h1[data-v-60b1dd3e] {
+    color: white;
+    font-size: 60px;
+    font-family: 'Abril Fatface', cursive;
+    text-shadow: 0 0 3px gray;
+}
+.b[data-v-60b1dd3e] {
+    color: black;
+    font-size: 20px;
+    font-family: 'Catamaran', sans-serif;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+.c[data-v-60b1dd3e] {
+    color: black;
+    font-size: 20px;
+    font-family: 'Catamaran', sans-serif;
+}
+div[data-v-60b1dd3e] {
+    font-size: 1.8rem;
+}
+.formcss[data-v-60b1dd3e] {
+    margin-bottom: 20px;
+}
+.all[data-v-60b1dd3e] {
+    background: url('https://wallpapercave.com/wp/j8eMFrM.jpg') no-repeat center center fixed;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    /* <------ */
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    margin-top: -5vh;
+    padding-top: 5vh;
+}
+.stuff[data-v-60b1dd3e] {
+    width: 60rem;
+    border-radius: 5rem;
+    background: black;
+    opacity: 0.8;
+    margin: auto;
+    margin-top: 15rem;
+    margin-bottom: 10rem;
+    padding-top: 12rem;
+    padding-bottom: 10vh;
+}
+
+/*# sourceMappingURL=app.872b6eb7459672cc43e734e6c658c2f2.css.map*/

@@ -2,7 +2,7 @@
 
     <div>
 
-        <div class="col-xs-3">
+        <div class="col-xs-12 col-sm-6 col-md-3">
             <div class="list panel panel-danger">
 
                 <div class="panel-heading">
