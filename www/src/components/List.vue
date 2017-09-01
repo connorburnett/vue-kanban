@@ -2,18 +2,22 @@
 
     <div>
 
-        <div class="col-xs-4">
-            <div class="list panel panel-primary">
+        <div class="col-xs-3">
+            <div class="list panel panel-danger">
 
                 <div class="panel-heading">
-                    <button @click="removeList(listprop)">X</button>
-                    <h5>{{listprop.name}}<br></h5>
+                    <h5>
+                        <span>
+                            <button class="btn btn-default red" @click="removeList(listprop)">x</button>
+                            {{listprop.name}}
+                        </span>
+                    </h5>
                     <form @submit.prevent="createTask()">
-                        <input type="text" v-model="task.name" placeholder="What are you doing today?">
-                        <button>Add Task</button>
+                        <input class="fillout form-control" type="text" v-model="task.name" placeholder="What are you doing today?">
+                        <button class="btn btn-default">Add Task</button>
                     </form>
                 </div>
-                <div class="panel-body">
+                <div>
                     <div v-for="task in tasks">
                         <task :taskprop="task"></task>
                     </div>
@@ -73,24 +77,39 @@
 
 <style>
     .default {
-        border: 1px solid black;
         margin-bottom: 20px;
-    }
-
-    .list {
-        border: 1px solid black;
-        height: 80vh;
     }
 
     h2 {
         color: black;
     }
 
+    h5 {
+        font-size: 20px;
+        color: black;
+        font-weight: bold;
+    }
+
     button {
         color: black;
+        font-family: 'Catamaran', sans-serif;
+        font-size: 15px;
+    }
+
+    .btn {
+        font-size: 15px;
     }
 
     input {
         color: black;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .fillout {
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 </style>

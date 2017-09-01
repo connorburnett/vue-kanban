@@ -1,27 +1,33 @@
 <template>
-  <div class="container">
+  <div>
+    <div class="title">
+      <router-link class="btncolor" to="/boards/">
+        <h1>The KANBAN</h1>
+      </router-link>
+    </div>
+    <div class="container">
+      <div class="row">
 
-    <div class="row">
 
-
-      <div class="board panel panel-primary">
-        <div class="panel-heading">
-          <button type="btn btn-primary">
-            <router-link to="/boards/">Home</router-link>
-          </button>
-          <span>
+        <div class="board panel panel-danger">
+          <div class="panel-heading">
+            <!--<button class="btn btn-default">
+              <router-link class="btncolor" to="/boards/">Home</router-link>
+            </button>-->
+            <span>
               <h2>{{board.name}}</h2> 
-              <h5>{{board.description}}</h5>
+              <h4>{{board.description}}</h4>
             </span>
-          <form @submit.prevent="createList()">
-            <input type="text" v-model="list.name" placeholder="List Name">
-            <button>Create List</button>
-          </form>
-        </div>
-        <div class="panel-body">
-          <div class="col-xs-12">
-            <div v-for="list in lists">
-              <list :listprop="list"></list>
+            <form @submit.prevent="createList()">
+              <input class="form-control" type="text" v-model="list.name" placeholder="List Name">
+              <button class="btn btn-default">Create List</button>
+            </form>
+          </div>
+          <div>
+            <div class="col-xs-12">
+              <div v-for="list in lists">
+                <list :listprop="list"></list>
+              </div>
             </div>
           </div>
         </div>
@@ -80,25 +86,42 @@
 </script>
 
 <style scoped>
-  .board {
-    height: 102vh;
+  .panel-heading {
+    padding-bottom: 40px;
+  }
+
+  h1 {
+    color: crimson;
+    font-size: 60px;
+    font-family: 'Abril Fatface', cursive;
+    text-shadow: 0 0 3px gray;
+    margin-bottom: 30px;
   }
 
   .default {
-    border: 1px solid black;
     margin-bottom: 20px;
   }
 
-  .list {
-    border: 1px solid black;
-    height: 80vh;
-  }
 
   h2 {
-    color: white;
+    color: black;
+    font-family: 'Catamaran', sans-serif;
+    font-size: 40px;
+    text-shadow: 0 0 3px gray;
   }
 
   button {
     color: black;
+    font-family: 'Catamaran', sans-serif;
+    font-size: 20px;
+  }
+
+  .btncolor {
+    color: black;
+  }
+
+  h4 {
+    font-family: 'Catamaran', sans-serif;
+    font-size: 20px;
   }
 </style>

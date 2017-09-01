@@ -2,16 +2,20 @@
     <div>
         <div class="panel panel-default">
             <div class="task panel-heading panel-primary">
-                <button @click="removeTask(taskprop)">Remove Task</button>
-                <h3>{{taskprop.name}}</h3>
+                <h3>
+                    <span>
+                        <button class="btn btn-default red" @click="removeTask(taskprop)">x</button>
+                        {{taskprop.name}}
+                    </span>
+                </h3>
             </div>
-            <div class="panel-body">
+            <div>
                 <div v-for="comment in comments">
                     <comment :commentprop="comment"></comment>
                 </div>
                 <form @submit.prevent="addComment()">
-                    <input type="text" v-model="comment.name" placeholder="Write comment...">
-                    <button type="submit">Submit</button>
+                    <input class="form-control" type="text" v-model="comment.name" placeholder="Write comment...">
+                    <button class="btn btn-default" type="submit">Submit</button>
                 </form>
             </div>
         </div>
@@ -64,13 +68,7 @@
 
 <style>
     .default {
-        border: 1px solid black;
         margin-bottom: 20px;
-    }
-
-    .list {
-        border: 1px solid black;
-        height: 80vh;
     }
 
     h2 {
@@ -78,6 +76,15 @@
     }
 
     button {
+        color: black;
+    }
+
+    .red {
+        color: red;
+    }
+
+    h3 {
+        font-size: 15px;
         color: black;
     }
 </style>

@@ -1,10 +1,11 @@
 <template>
+
     <div>
 
         <!--Goes in the comment template-->
         <span>
             {{commentprop.name}}
-            <button @click="removeComment(commentprop)">X</button>
+            <button class="btn btn-default" @click="removeComment(commentprop)">x</button>
         </span>
         <!---->
     </div>
